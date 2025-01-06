@@ -1,0 +1,62 @@
+body{background-color: #444;}
+a{text-decoration: none;}
+button{
+  background-color: transparent; border: 0;
+  padding: 3px 12px; margin: 0 0 0 10px; border-radius: 3px;
+}
+
+
+/* header */
+.header{
+  display: flex; justify-content: space-between;
+  width: 100%; padding: 2rem 10vw; 
+  background-color: #444; color: #fff; 
+}
+.header .logo{margin-right: 2rem;}
+.header .gnb{display: flex; align-items: center; }
+.header .utilMenu{display: flex; align-items: center; font-size: 14px;}
+.header a{ color: #fff; text-transform: uppercase;}
+.header .gnb a{padding: 0 1rem; }
+.header .utilMenu a{padding: 0 0.75rem; }
+
+
+
+/* Basic Layout */
+.container{
+  display: flex; gap : 1rem;
+  width: 100%; 
+  margin: 1rem 0;  padding: 0 10vw; }
+.container main,
+.container aside{padding : 2em; background-color :#EEE;border-radius: 0.5rem;}
+.container main {flex: 4; }
+.container aside { flex: 1;}
+
+
+/* todo */
+.todoMenu{ margin-right : 1rem ; font : bold 16px 'inherit'; text-decoration : underline; }
+
+.content{ padding: 2rem 1rem; }
+
+
+.todo li {display: flex; border-bottom: #ddd 1px solid;}
+
+.todo .readItem {margin: 2rem 0;}
+.todo .readItem li:last-of-type{border:0}
+.todo .readItem li .title{flex: 1; padding: 0.5rem 1rem; text-align: right;}
+.todo .readItem li .value{flex: 4; padding: 0.5rem 1rem;}
+
+.todo .list{padding: 2rem 0;}
+.todo .list li{display: flex; padding: 0.5rem 0;}
+.todo .list li span.tno{flex:1; text-align: center;}
+.todo .list li span.title{flex:5}
+.todo .list li span.dueDate{flex:3; text-align: center;}
+
+.todo .btnGroup{text-align: right;}
+.todo .btnGroup button{background-color: #000; color: #fff;}
+
+.todo .pagination{text-align: center;}
+.todo .pagination span{padding: 0 0.5rem;}
+
+.modify{background-color: #000; color: #fff;}
+
+
