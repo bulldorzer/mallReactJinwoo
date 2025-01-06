@@ -12,12 +12,12 @@ const useCustomHook = () =>{
     const [refresh,setRefresh] = useState(false)
 
     const [queryParams] = useSearchParams() // 쿼리스트링 추철
-    console.log("queryParams",queryParams);
-    console.log("queryParams",[queryParams]);
+    // console.log("queryParams",queryParams);
+    // console.log("queryParams",[queryParams]);
     const page = getNum(queryParams.get('page'),1); // 쿼리스트링 값 뽑아낼때 get메소드로 뽑아냄
-    console.log("page",page);
+    // console.log("page",page);
     const size = getNum(queryParams.get('size'),10);
-    console.log("size",size);
+    // console.log("size",size);
 
     const queryDefault = createSearchParams({page, size}).toString(); // ?page=1&size=10
     // const queryDefault = createSearchParams({page:page, size: size})//배열형태로 가저옴
@@ -30,7 +30,7 @@ const useCustomHook = () =>{
         if (pageParam) {
             const pageNum = getNum(pageParam.page, 1);
             const sizeNum = getNum(pageParam.size, 10);
-            queryStr = createSearchParams({pageNum,sizeNum}).toString()
+            queryStr = createSearchParams({page : pageNum, size : sizeNum}).toString()
         }else{
             // 없으면 쿼리스트링 초기화
             queryStr = queryDefault
@@ -51,7 +51,7 @@ const useCustomHook = () =>{
 
     // 상세 페이지 이동
     const moveToRead = (num) =>{
-        console.log(queryDefault);
+        // console.log(queryDefault);
         navigate( {
             pathname : `../read/${num}`,
             search : queryDefault

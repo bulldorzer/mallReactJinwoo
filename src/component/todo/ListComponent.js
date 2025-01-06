@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 // import {getOne} from '../../api/todoApi'
 import useCustomMove from "../../hook/useCustomHook"
 import PageConponent from "../common/PageConponent"
+import { getList } from "../../api/todoApi"
 
 // 초기값 객체
 const initData = {
@@ -20,7 +21,7 @@ const initData2 = {
 }
 // 초기값 객체
 const initState = {
-    dtoList : [initData,initData2,{...initData2,tno:2}], // 서버데이터가 여기에 들어옴
+    dtoList : [], // 서버데이터가 여기에 들어옴
     pageNumList : [1,2,3,4,5],
     pageRequestDto : null,
     prev : false,
@@ -37,7 +38,9 @@ const ListComponent = ({tno}) =>{
     const [serverData,setServerData] = useState(initState);
     
     useEffect(()=>{
-        console.log('서버 요청 코드 작성');
+        getList({page,size}).then( data=>{
+          setServerData(data)  
+        })
     },[page,size,refresh])
 
 

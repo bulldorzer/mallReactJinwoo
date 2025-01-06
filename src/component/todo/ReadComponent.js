@@ -1,6 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 // import {getOne} from '../../api/todoApi'
 import useCustomMove from "../../hook/useCustomHook"
+import { getOne } from "../../api/todoApi"
 
 // 초기값 객체
 const initState = {
@@ -13,6 +14,13 @@ const initState = {
 const ReadComponent = ({tno}) =>{
     const [todo,setTodo] = useState(initState)
     // useCustomMove 컴포넌트 안에 있는 함수들 호출 
+
+    useEffect(()=>{
+        getOne(tno).then(data=>{
+            setTodo(data)
+        })
+    },[tno])
+    
     const {moveToList,moveToModify} = useCustomMove();
 
     return(

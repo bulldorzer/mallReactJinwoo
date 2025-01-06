@@ -1,30 +1,58 @@
 import { useEffect, useState } from "react"
-
+import useCustomMove from "../../hook/useCustomHook"
+import ResultModal from "../common/ResultModal"
+import { getOne, deleteOne, putOne } from "../../api/todoApi"
 const initState = {
     tno : 0,
-    title : 'test',
-    writer : 'test',
-    dueDate : '2025-01-06',
+    title : '',
+    writer : '',
+    dueDate : '',
     complete : false
 }
 
 
 
-const ModifyComponent = ({tno, moveList, moveRead}) =>{
+const ModifyComponent = ({tno}) =>{
     const [todo, setTodo] = useState({...initState})
+    const {moveToList,moveToRead} = useCustomMove();
+    const [showResult, setShowResult] = useState(null)
+    
 
     useEffect(()=>{
-        console.log(tno);
+        getOne(tno).then(data=>{
+            setTodo(data)
+        })
     },[tno])
+
+    const handleClickModify = () =>{
+        putOne(todo).then(data=>{
+            console.log("modify result: " + data)
+            setShowResult('Modify')
+        })
+    }
+    const handleClickDelete = () =>{
+        deleteOne(tno).then(data =>{
+            console.log("delete result: " + data)
+            setShowResult('Delete')
+        })
+    }
 
     const handleChangeTodo = (e) =>{
         const {name, value} = e.target
         setTodo((prevTodo)=>({...prevTodo, [name] : value}))
+        console.log("e.target.value",e.target.value)
+        console.log("todo.complete",todo.complete)
+        
+    }
+
+    const closeModal = () =>{
+        setShowResult(null)
     }
 
     return(
         <>
-        <div>
+        {showResult && <ResultModal title={'처리결과'} content={showResult} cbfn={closeModal}/>}
+        <ul>
             {makeLi('Tno','tno',todo.tno,null,"text",true)}
             {makeLi('Writer','writer',todo.writer,null,"text",true)}
             {makeLi('Title','title',todo.title,handleChangeTodo)}
@@ -32,14 +60,14 @@ const ModifyComponent = ({tno, moveList, moveRead}) =>{
             <li>
                 <span>Complete</span>
                 <span>
-                    <label><input type="radio" name="status"/>Yes</label>
-                    <label><input type="radio" name="status"/>No</label>
+                    <label><input type="radio" name="complete" value="true" onChange={handleChangeTodo} />Yes</label>
+                    <label><input type="radio" name="complete" value="false" onChange={handleChangeTodo} />No</label>
                 </span>
             </li>
-        </div>
+        </ul>
         <div className="btnGrop">
-            <button type="button" className="btn" onClick={()=>{}}>삭제</button>
-            <button type="button" className="btn" onClick={()=>{}}>수정</button>
+            <button type="button" className="btn" onClick={handleClickDelete}>삭제</button>
+            <button type="button" className="btn" onClick={handleClickModify}>수정</button>
         </div>
         </>
     )

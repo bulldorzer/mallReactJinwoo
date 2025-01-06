@@ -18,7 +18,7 @@ const ModifyPage = ({tno}) => {
     return(
         <>
             <h3>Todo Modify Page...</h3>
-            <ModifyComponent/>
+            <ModifyComponent tno={tno}/>
         </>        
     )
 

@@ -1,8 +1,8 @@
 import { useState } from "react"
 import ResultModal from "../common/ResultModal"
+import { postAdd } from "../../api/todoApi"
 
 const initState = {
-    tno : 0,
     title : '',
     writer : '',
     dueDate : ''
@@ -39,7 +39,23 @@ const AddComponent = () =>{
     }
 
     const  handleClickAdd = (e) =>{
-        console.log(todo);
+        postAdd(todo).then(result =>{ // 통신 성공시 {'RESULT' = 'SUCCESS'}
+            console.log(result.TNO)
+            setTodo({...initState})
+            setShowResult(result.TNO) // = true 모달 보임 결과값 표시
+            // controller에서 리턴되는 키값에 의해 결정됨
+            /*
+                @PostMapping("/")
+                public Map<String, Long> register(@RequestBody TodoDTO todoDTO){
+                    log.info("TodoDTO : "+ todoDTO);
+
+                    Long tno = service.register(todoDTO);
+                    return Map.of("TNO", tno);
+                }
+            */
+        }).catch(e=>{
+            console.error(e)
+        })
         setShowResult(todo)
     }
 
@@ -52,7 +68,7 @@ const AddComponent = () =>{
         {showResult && 
             <ResultModal 
             title="Add showResult" 
-            content={`New ${showResult.tno} Added`} 
+            content={`New ${showResult} Added`} 
             cbfn={closeModal}
         />}
         <ul className="add">

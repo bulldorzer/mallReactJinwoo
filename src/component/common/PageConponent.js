@@ -6,7 +6,7 @@ const PageConponent = ({ServerData, movePage}) =>{
     const moveNextPage = () =>{movePage({ page : ServerData.nextPage})} // 다음 페이지 블록이동
     return(
         <div className="pagination">
-            {console.log("ServerData",ServerData)}
+            {/* {console.log("ServerData",ServerData)} */}
             {
                 ServerData.prev && 
                 <div onClick={movePrevPage}>Prev</div>
