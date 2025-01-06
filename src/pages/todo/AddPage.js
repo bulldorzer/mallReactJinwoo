@@ -1,3 +1,4 @@
+import AddComponent from "../../component/todo/AddComponent";
 
 
 function AddPage (){
@@ -5,6 +6,7 @@ function AddPage (){
         <>
 
             <h3>Todo Add Page</h3>
+            <AddComponent/>
 
         </>        
     )

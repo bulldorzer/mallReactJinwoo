@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom";
 
 const getNum = (param,defaultValue) =>{
@@ -7,6 +8,9 @@ const useCustomHook = () =>{
 
 
     const navigate = useNavigate() // 다른페이지로 동적 이동
+    
+    const [refresh,setRefresh] = useState(false)
+
     const [queryParams] = useSearchParams() // 쿼리스트링 추철
     console.log("queryParams",queryParams);
     console.log("queryParams",[queryParams]);
@@ -16,6 +20,8 @@ const useCustomHook = () =>{
     console.log("size",size);
 
     const queryDefault = createSearchParams({page, size}).toString(); // ?page=1&size=10
+    // const queryDefault = createSearchParams({page:page, size: size})//배열형태로 가저옴
+    // .toString(); // 스트링으로 가져옴 아래내용을 위로 축약한것
 
     // 리스트 화면 이동
     // pageParam 값이 있다면 새로운 쿼리스트링 만들어서 이동
@@ -30,6 +36,8 @@ const useCustomHook = () =>{
             queryStr = queryDefault
         }
         navigate( { pathname : `/todo/list`, search : queryStr} )
+
+        setRefresh(!refresh);
         
     }
 
@@ -41,7 +49,16 @@ const useCustomHook = () =>{
         } )
     })
 
-    return {moveToList,moveToModify,page,size}
+    // 상세 페이지 이동
+    const moveToRead = (num) =>{
+        console.log(queryDefault);
+        navigate( {
+            pathname : `../read/${num}`,
+            search : queryDefault
+        } )
+    }
+
+    return {moveToList,moveToModify,moveToRead,page,size,refresh}
 
     
 

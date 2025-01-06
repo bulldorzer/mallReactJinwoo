@@ -1,5 +1,6 @@
 
 import { useNavigate} from "react-router-dom";
+import ModifyComponent from "../../component/todo/ModifyComponent";
 
 
 const ModifyPage = ({tno}) => {
@@ -17,6 +18,7 @@ const ModifyPage = ({tno}) => {
     return(
         <>
             <h3>Todo Modify Page...</h3>
+            <ModifyComponent/>
         </>        
     )
 

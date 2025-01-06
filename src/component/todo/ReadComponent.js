@@ -25,8 +25,8 @@ const ReadComponent = ({tno}) =>{
             {makeDiv('Complete',todo.complete?'Complete' : 'Not Yet')}
         </ul>
         <div className="btnGrop">
-            <button type="button" onClick={()=>{moveToList()}}>목록</button>
-            <button type="button" onClick={()=>{moveToModify(tno)}}>수정</button>
+            <button type="button" className="btn" onClick={()=>{moveToList()}}>목록</button>
+            <button type="button" className="btn" onClick={()=>{moveToModify(tno)}}>수정</button>
         </div>
         </>
     )
