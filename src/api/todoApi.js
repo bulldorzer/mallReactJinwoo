@@ -20,9 +20,15 @@ export const getList = async (pageParam) =>{
 }
 
 // 책 162p - 추가 기능
-export const postAdd = async (todoObj) =>{
+export const postAdd = async (todo) =>{
     //post 통신
-    const res = await axios.post(`${prefix}/` , todoObj)
+    const res = await axios.post(`${prefix}/` , todo)
+    return res.data
+}
+
+// 수정 책 177p - ModifyComponent 수정
+export const putOne = async (todo) =>{ //객체정보 전부다 넘어옴
+    const res = await axios.put(`${prefix}/${todo.tno}`, todo )
     return res.data
 }
 
@@ -30,11 +36,5 @@ export const postAdd = async (todoObj) =>{
 export const deleteOne = async (tno) =>{
     const res = await axios.delete(`${prefix}/
         ${tno}` )
-    return res.data
-}
-
-export const putOne = async (todo) =>{ //객체정보 전부다 넘어옴
-    const res = await axios.put(`${prefix}/
-        ${todo.tno}`, todo )
     return res.data
 }

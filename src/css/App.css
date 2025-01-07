@@ -42,16 +42,30 @@ button{
 
 .todo li {display: flex; border-bottom: #ddd 1px solid;}
 
-.todo .readItem {margin: 2rem 0;}
-.todo .readItem li:last-of-type{border:0}
-.todo .readItem li .title{flex: 1; padding: 0.5rem 1rem; text-align: right;}
-.todo .readItem li .value{flex: 4; padding: 0.5rem 1rem;}
-
+/* 목록페이지 Listpage */
 .todo .list{padding: 2rem 0;}
+.todo .list .header{text-align: center;}
 .todo .list li{display: flex; padding: 0.5rem 0;}
-.todo .list li span.tno{flex:1; text-align: center;}
-.todo .list li span.title{flex:5}
-.todo .list li span.dueDate{flex:3; text-align: center;}
+.todo .list li span{flex:2.5; text-align: center;}
+.todo .list li span.tno{flex:1;}
+.todo .list li span.title{flex:5; text-align: left;}
+.todo .list li.header span.title{text-align: center;}
+
+/* 상세페이지 ReadPage, AddPage, ModifyPage item 공통*/
+.todo .item {margin: 2rem 0;}
+.todo .item li:last-of-type{border:0}
+.todo .item li .labelWrap{flex: 1; padding: 0.5rem 1rem; text-align: right;}
+.todo .item li .dataWrap{flex: 4; padding: 0.5rem 1rem;}
+
+.todo .item li input{ min-width: 180px; padding: 5px 10px; border: 1px solid #ddd;}
+.todo .item li input[type=radio]{ min-width: 30px;}
+
+/* 읽기전용 필드*/
+.todo .item li .readOnly input{
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+}
 
 .todo .btnGroup{text-align: right;}
 
@@ -59,6 +73,5 @@ button{
 .todo .pagination{text-align: center;}
 .todo .pagination a{padding: 0 0.5rem;}
 
-.modify{background-color: #000; color: #fff;}
 
 

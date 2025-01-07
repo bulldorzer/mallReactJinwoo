@@ -1,19 +1,22 @@
 
-import { useNavigate} from "react-router-dom";
+import { useNavigate, useParams} from "react-router-dom";
 import ModifyComponent from "../../component/todo/ModifyComponent";
 
+// todo/read/104?page=1&size=10
+// useParams : 104(파라미터값)
+// useSearchParams : 쿼리스트링 추출 page, size값을 추출
+const ModifyPage = () => {
 
-const ModifyPage = ({tno}) => {
-
-    const navigate = useNavigate()
+    const {tno} = useParams() // url에서 tno 추출
+    // const navigate = useNavigate()
         
-    const moveToRead = ()=>{ // read 화면 이동
-        navigate( { pathname : `/todo/read/${tno}` } )
-    }
+    // const moveToRead = ()=>{ // read 화면 이동 하라고 명령하는 navigate 
+    //     navigate( { pathname : `/todo/read/${tno}` } )
+    // }
 
-    const moveToList = ()=>{ // 리스트 화면 이동
-        navigate( { pathname : `/todo/list`} )
-    }
+    // const moveToList = ()=>{ // 리스트 화면 이동
+    //     navigate( { pathname : `/todo/list`} )
+    // }
 
     return(
         <>

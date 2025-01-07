@@ -1,6 +1,8 @@
 import { useState } from "react"
-import ResultModal from "../common/ResultModal"
 import { postAdd } from "../../api/todoApi"
+import ResultModal from "../common/ResultModal"
+import LiItem from "../common/LiItem"
+import useCustomHook from "../../hook/useCustomHook"
 
 const initState = {
     title : '',
@@ -13,6 +15,8 @@ const initState = {
 const AddComponent = () =>{
     const [todo, setTodo] = useState({...initState})
     const [showResult,setShowResult] = useState(null)
+
+    const {moveToList} = useCustomHook()
 
     const handleChangeTodo = (e) => {
         /* 
@@ -40,7 +44,6 @@ const AddComponent = () =>{
 
     const  handleClickAdd = (e) =>{
         postAdd(todo).then(result =>{ // 통신 성공시 {'RESULT' = 'SUCCESS'}
-            console.log(result.TNO)
             setTodo({...initState})
             setShowResult(result.TNO) // = true 모달 보임 결과값 표시
             // controller에서 리턴되는 키값에 의해 결정됨
@@ -63,6 +66,12 @@ const AddComponent = () =>{
         setShowResult(null)
     }
 
+    const fields = [
+        {label : 'Writer', name : 'writer'},
+        {label : 'Title', name : 'title'},
+        {label : 'Due Date', name : 'dueDate', type : 'date'}
+    ]
+
     return(
         <>
         {showResult && 
@@ -71,24 +80,77 @@ const AddComponent = () =>{
             content={`New ${showResult} Added`} 
             cbfn={closeModal}
         />}
-        <ul className="add">
+        <ul className="add item">
+            {
+                fields.map(({label, name, type})=>{
+                    return(
+                        <LiItem  
+                        key={name}
+                        label = {label} 
+                        name = {name}
+                        type={type}
+                        value={todo[name]}
+                        onChange={handleChangeTodo}  
+                         /> // onChange 핸들러 전달
+                    )
+                })
+                /*
+                fields.map(({label,type,name})=>(
+                    <li>
+                        <span className="labelWrap"><label>{label}</label></span>
+                        <span className="dataWrap">
+                            <input 
+                                type={type}
+                                name={name}
+                                value={todo[name]}
+                                onChange={handleChangeTodo}
+                            ></input>
+                        </span>
+                    </li>
+                ))
+                */
+            }
+            {/*
             <li>
-                <div>Title</div>
+                <label>Title</label>
                 <input name="title" type="text" value={todo.title} 
                 onChange={handleChangeTodo}/>
             </li>
-            <li>
-                <div>Text</div>
+
+             <li>
+                <label>Text</label>
                 <input name="writer" type="text" value={todo.writer} onChange={handleChangeTodo}/>
             </li>
             <li>
-                <div>DueDate</div>
+                <label>DueDate</label>
                 <input name="dueDate" type="date" value={todo.dueDate} onChange={handleChangeTodo}/>
-            </li>
+            </li> 
+            */}
         </ul>
-        <button type="button" className="btn" onClick={handleClickAdd}>ADD</button>
+        <div className="btnGroup">
+            <button type="button" className="btn" onClick={()=>{moveToList()}}>목록</button>
+            <button type="button" className="btn" onClick={handleClickAdd}>등록</button>
+        </div>
         </>
     )
 }
+
+// 컴포넌트
+/*
+const LiField = ({label, type = 'text', name, todo, onChange}) =>(
+    <li>
+        <span className="labelWrap"><label>{label}</label></span>
+        <span className="dataWrap">
+            <input 
+                type={type}
+                name={name}
+                value={todo[name]}
+                onChange={onChange}
+            ></input>
+        </span>
+    </li>
+)
+*/    
+
 
 export default AddComponent;

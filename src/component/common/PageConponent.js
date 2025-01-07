@@ -9,19 +9,21 @@ const PageConponent = ({ServerData, movePage}) =>{
             {/* {console.log("ServerData",ServerData)} */}
             {
                 ServerData.prev && 
-                <div onClick={movePrevPage}>Prev</div>
+                <button type="button" onClick={movePrevPage}>Prev</button>
             }
+            <span>
+                {
+                    ServerData.pageNumList.map(pageNum =>
+                        <Link key={pageNum} 
+                            onClick={ () =>movePage({ page : pageNum}) }
+                            className="pageNum">
+                            {pageNum}
+                        </Link>
+                    )
+                }
+            </span>
             {
-                ServerData.pageNumList.map(pageNum =>
-                    <Link key={pageNum} 
-                        onClick={ () =>movePage({ page : pageNum}) }
-                        className="pageNum">
-                        {pageNum}
-                    </Link>
-                )
-            }
-            {
-                ServerData.next && <div onClick = {moveNextPage}>Next</div>
+                ServerData.next && <button type="button" onClick = {moveNextPage}>Next</button>
             }
         </div>
     )

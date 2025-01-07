@@ -12,7 +12,7 @@ function ListPage (){
     return(
         <>
 
-            <h3>Todo List Page....{page} ----{size}</h3>
+            <h3>Todo List Page....{page}</h3>
             <ListComponent/>
         </>        
     )
