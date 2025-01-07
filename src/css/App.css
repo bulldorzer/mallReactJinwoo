@@ -35,9 +35,9 @@ button{
 
 
 /* todo */
-.todoMenu{ margin-right : 1rem ; font : bold 16px 'inherit'; text-decoration : underline; }
-
 .content{ padding: 2rem 1rem; }
+
+.menu > button{ margin-right : 1rem ; font : bold 16px 'inherit'; text-decoration : underline; }
 
 
 .todo li {display: flex; border-bottom: #ddd 1px solid;}

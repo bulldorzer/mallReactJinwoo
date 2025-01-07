@@ -7,6 +7,7 @@ const BasicMenu = ()=>{
             <Link to={"/"}>home</Link>
             <Link to={"/about"}>about</Link>
             <Link to={"/todo"}>todo</Link>
+            <Link to={"/products"}>products</Link>
         </nav>
     )
 }
