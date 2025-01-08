@@ -11,6 +11,9 @@ const IndexPage = () =>{
     const handleClickAdd = useCallback(()=>{
         navigate({pathname : 'add'})
     })
+    const handleClickRead = useCallback(()=>{
+        navigate({pathname : 'read/1'})
+    })
 
     return(
         <BasicLayout> 
@@ -18,6 +21,7 @@ const IndexPage = () =>{
             <div className="menu">
                 <button onClick={handleClickList}>LIST</button>
                 <button onClick={handleClickAdd}>Add</button>
+                <button onClick={handleClickRead}>Read</button>
             </div>
             <div className="products content"> 
                 <Outlet/>

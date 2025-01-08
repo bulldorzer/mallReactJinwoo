@@ -8,12 +8,12 @@ const ResultModal = ({title, content, cbfn}) =>{
     }
 
     return (
-        <div
+        <div 
+            className="result modal"
             onClick={handleClick}>
-            <ul>
-                <li>{title}</li>
-                <li>{content}</li>
-            </ul>
+            
+            <h2>{title}</h2>
+            <p>{content}</p>
             <button className="btn" onClick={handleClick}>Close</button>
         </div>
     )

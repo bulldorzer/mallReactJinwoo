@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 // import {getOne} from '../../api/todoApi'
 import useCustomMove from "../../hook/useCustomHook"
-import PageConponent from "../common/PageConponent"
+import PageComponent from "../common/PageComponent"
 import { getList } from "../../api/todoApi"
 
 // 초기값 객체
@@ -76,7 +76,7 @@ const ListComponent = ({tno}) =>{
                 ))
             }
         </ul>
-        <PageConponent ServerData={serverData} movePage={moveToList}></PageConponent>
+        <PageComponent ServerData={serverData} movePage={moveToList}></PageComponent>
         </>
         
     )

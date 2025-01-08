@@ -1,4 +1,9 @@
 import { useRef, useState } from "react"
+import { postAdd } from "../../api/productsApi"
+import FetchingModal from "../common/FetchingModal"
+import ResultModal from "../common/ResultModal"
+import useCustomHook from "../../hook/useCustomHook"
+
 // 초기값 객체
 const initState = {
     pname : '',
@@ -9,7 +14,13 @@ const initState = {
 
 const AddComponent = () =>{
     const uploadRef = useRef() // getElementById()
+    const acceptFiles = ".png,.jpg,.jpeg,.pdf";
+
     const [product, setProduct] = useState({...initState})
+    const [fetching,setFetching] = useState(false)
+    const [result,setResult] = useState(false)
+
+    const {moveToList} = useCustomHook()
 
     const handleChangeProduct = (e) => {
         const {name, value} = e.target
@@ -19,14 +30,47 @@ const AddComponent = () =>{
         
     }
 
-    const  handleClickAdd = (e) =>{
+    // 비동기 함수로서 함수 명에 async와 기능 수행되는 함수에 await를 써야함
+    const  handleClickAdd = async (e) =>{
+        setFetching(true)
         const files = uploadRef.current.files
         const formData = new FormData();
-        console.log(formData)
-    }
+        
+        for (let i = 0; i < files.length; i++) {
+            formData.append("files",files[i]);
+            
+        }
+        // for (let file of files) {
+        //     formData.append("file",file);
+        // }
+        
+        // 첨부파일 정보 읽어서 저장
+        // files.forEach( file => formData.append("files",file) )
 
+        //other data
+        formData.append("pname", product.pname)
+        formData.append("pdesc", product.pdesc)
+        formData.append("price", product.price)
+
+        formData.forEach((v,k)=>console.log(k,v))
+
+        await postAdd(formData).then(data =>{
+            setFetching(false)
+            setResult(data.result)
+
+        });// product로 받음 앞에 순서 끝나고 처리
+    }
+    const closeModal = () => {
+        setResult(null);
+        moveToList({page:1})
+    }
     return(
         <>
+            {fetching && <FetchingModal/>}
+            {result && <ResultModal
+                            title={'Product Add Result'}
+                            content={`${result}번 등록완료`}
+                            cbfn={closeModal}/>}
             <ul>
                 <li>
                     <span>Product Name</span>
@@ -55,7 +99,7 @@ const AddComponent = () =>{
                     <span>
                         <input
                             name="price"
-                            type=""
+                            type="number"
                             value={product.price}
                             onChange={handleChangeProduct}
                         />
@@ -69,6 +113,7 @@ const AddComponent = () =>{
                             name="files"
                             type="file"
                             multiple={true}
+                            accept={acceptFiles}
                         />
                     </span>
                 </li>
