@@ -33,12 +33,16 @@ const AddComponent = () =>{
     // 비동기 함수로서 함수 명에 async와 기능 수행되는 함수에 await를 써야함
     const  handleClickAdd = async (e) =>{
         setFetching(true)
-        const files = uploadRef.current.files
-        const formData = new FormData();
         
-        for (let i = 0; i < files.length; i++) {
+        //신규추가 이미지 목록 - form데이터에 담음
+        const files = uploadRef.current.files // useRef 작성된 요소의 files 목록 배열로 제출
+
+
+        const formData = new FormData(); 
+        // 첨부된 파일에서 값을 하나씩 뽑아서 files라는 key값으로 첨부됨
+        
+        for (let i = 0; i < files.length; i++) { 
             formData.append("files",files[i]);
-            
         }
         // for (let file of files) {
         //     formData.append("file",file);
@@ -47,11 +51,12 @@ const AddComponent = () =>{
         // 첨부파일 정보 읽어서 저장
         // files.forEach( file => formData.append("files",file) )
 
-        //other data
+        //other data 기존데이터
         formData.append("pname", product.pname)
         formData.append("pdesc", product.pdesc)
         formData.append("price", product.price)
 
+        
         formData.forEach((v,k)=>console.log(k,v))
 
         await postAdd(formData).then(data =>{

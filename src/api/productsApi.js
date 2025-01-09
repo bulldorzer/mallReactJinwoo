@@ -18,7 +18,7 @@ export const getList = async(pageParam) =>{
     }
 }
 
-// 비동기 함수
+/** 글추가 api */
 export const postAdd = async(product) =>{
     // const header = { headers: {"Content-Type" : "multipart/form-data" } } 
     const header = { headers: { "Content-Type": "multipart/form-data" } }; 
@@ -31,8 +31,9 @@ export const postAdd = async(product) =>{
 
 
 // 수정 책 177p - ModifyComponent 수정
-export const putOne = async (product) =>{ //객체정보 전부다 넘어옴
-    const res = await axios.put(`${host}/${product.pno}`, product )
+/** 수정 api */
+export const putOne = async (pno,product) =>{ //객체정보 전부다 넘어옴
+    const res = await axios.put(`${host}/${pno}`, product )
     return res.data
 }
 
