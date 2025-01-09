@@ -9,7 +9,7 @@ import ModifyPage from "../pages/products/ModifyPage";
 const Loading = <div>Loading...</div>
 
 
-const todoRouter = () => {
+const productsRouter = () => {
     return [
         {
             path : "",
@@ -34,4 +34,4 @@ const todoRouter = () => {
     ]
 }
 
-export default todoRouter;
+export default productsRouter;

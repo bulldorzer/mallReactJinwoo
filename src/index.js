@@ -3,11 +3,21 @@ import ReactDOM from 'react-dom/client';
 import './css/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import store from './store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  
-    <App />
+
+    
+    /**
+     * 리덕스의 스토어를 React컴포넌트 트리에 전달하는 역할의 컴포넌트
+     * 리듀서 : 데이터 처리 --> 액션의 페로드값을 처리하여 앞으로 보관할 상태 데이터를 반환
+     * 액션 : 리듀서 호출
+     */
+    <Provider store={store}>
+        <App />
+    </Provider>
   
 );
 

@@ -3,6 +3,7 @@ import { Suspense, lazy } from "react"; // 컴포넌트 로딩 최적화
 
 import todoRouter from "./todoRouter";
 import productsRouter from "./productsRouter";
+import memberRouter from "./memberRouter"
 
 const Loading = <div>Loding...</div>
 // 렌더링 전까지는 다운로드 하지 X 
@@ -30,7 +31,11 @@ const root = createBrowserRouter([
         path : "products",
         element : <Suspense fallback={Loading}><ProductsIndex/></Suspense>,
         children : productsRouter()
-    }  
+    },
+    {
+        path : "member",
+        children : memberRouter()
+    }    
 
     // localhost:3000/todo/list
     // localhost:3000/todo/add
