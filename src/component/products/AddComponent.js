@@ -2,7 +2,7 @@ import { useRef, useState } from "react"
 import { postAdd } from "../../api/productsApi"
 import FetchingModal from "../common/FetchingModal"
 import ResultModal from "../common/ResultModal"
-import useCustomHook from "../../hook/useCustomHook"
+import useCustomMove from "../../hook/useCustomMove"
 
 // 초기값 객체
 const initState = {
@@ -20,7 +20,7 @@ const AddComponent = () =>{
     const [fetching,setFetching] = useState(false)
     const [result,setResult] = useState(false)
 
-    const {moveToList} = useCustomHook()
+    const {moveToList} = useCustomMove()
 
     const handleChangeProduct = (e) => {
         const {name, value} = e.target

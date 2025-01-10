@@ -2,7 +2,7 @@ import { useState } from "react"
 import { postAdd } from "../../api/todoApi"
 import ResultModal from "../common/ResultModal"
 import LiItem from "../common/LiItem"
-import useCustomHook from "../../hook/useCustomHook"
+import useCustomMove from "../../hook/useCustomMove"
 
 const initState = {
     title : '',
@@ -16,7 +16,7 @@ const AddComponent = () =>{
     const [todo, setTodo] = useState({...initState})
     const [showResult,setShowResult] = useState(null)
 
-    const {moveToList} = useCustomHook()
+    const {moveToList} = useCustomMove()
 
     const handleChangeTodo = (e) => {
         /* 

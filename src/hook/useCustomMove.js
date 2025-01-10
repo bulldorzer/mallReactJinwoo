@@ -4,7 +4,7 @@ import { createSearchParams, useNavigate, useSearchParams } from "react-router-d
 const getNum = (param,defaultValue) =>{
     return (param) ? parseInt(param) : defaultValue;
 }
-const useCustomHook = () =>{
+const useCustomMove = () =>{
 
 
     const navigate = useNavigate() // 다른페이지로 동적 이동
@@ -64,4 +64,4 @@ const useCustomHook = () =>{
 
 }
 
-export default useCustomHook;
+export default useCustomMove;

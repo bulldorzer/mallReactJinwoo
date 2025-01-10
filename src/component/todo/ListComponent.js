@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 // import {getOne} from '../../api/todoApi'
-import useCustomMove from "../../hook/useCustomHook"
+import useCustomMove from "../../hook/useCustomMove"
 import PageComponent from "../common/PageComponent"
 import { getList } from "../../api/todoApi"
 

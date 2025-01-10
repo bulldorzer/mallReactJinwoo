@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import Login from "../pages/member/LoginPage";
+import Cart from "../pages/member/CartPage";
 
 
 
@@ -20,6 +21,10 @@ const memberRouter = () => {
         {
             path : "logout",
             element : <Navigate replace to="login"/>
+        },
+        {
+            path : "cart",
+            element : <Suspense fallback={Loading}><Cart/></Suspense>
         }
         // {
         //     path : "read/:pno",

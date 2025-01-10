@@ -7,7 +7,10 @@ import { loginPost } from "../api/memberApi";
 const initState = {
     email:''
 }
-
+/**
+ * @param : 아이디 비번 -> 서버 응답결과 리턴
+ * 비동기로 처리
+ */
 export const loginPostAsync = createAsyncThunk('loginPostAsync',(param)=>{
     return loginPost(param)
 })
@@ -27,32 +30,41 @@ export const loginPostAsync = createAsyncThunk('loginPostAsync',(param)=>{
  *          type : "LoginSlice/login",
  *          payload : {email: "user@example.com"}
  *  }
+ * 
+ *  Fetch : 응답 데이터 Promis 객체 - 상태, 데이터, 같이옴
+ *  상태 3가지 : 처리중 : pending 성공 : fulfilled, 실패 : rejected
  */
 const loginSlice = createSlice({
     name: 'LoginSlice',
     initialState : initState,
     reducers : { // export시 action 이름으로 호출하여 사용하게됨
-        login : (state, action) =>{ // state: 데이터가 들어옴 action : 들어온 데이터 처리
+        login : (state, action) =>{ // state: 현재화면의 상태값 action : 들어온 데이터 처리
             console.log("login...")
-            const data = action.payload // state값을 추출
-            return({email : data.email})
+            // const data = action.payload // action에 저장된 변경된 값을 추출
+            // return({email : data.email})
+            state = action.payload.email; // 위 코드를 줄임 로그인처리
         },
         logout : (state, action) =>{
             console.log("logout...")
-            return({...initState})
-        },
-        extraReducers : (builder) =>{
-            builder
-            .addCase(loginPostAsync.fulfilled,(state,action)=>{
-                console.log("fulfilled")
-            })
-            .addCase(loginPostAsync.pending,(state,action)=>{
-                console.log("pending")
-            })
-            .addCase(loginPostAsync.rejected,(state,action)=>{
-                console.log("rejected")
-            })
+            // return({...initState})
+            state.email=''; // 초기값 설정
         }
+    },
+    extraReducers : (builder) =>{ // loginPostAsync실행후 state 변화에 따른 추가 로직을 정의하는 레고 블록 조립기
+        builder
+        // 상태에 따라 추가 실행할 구문 
+        .addCase(loginPostAsync.fulfilled,(state,action)=>{
+            console.log("fulfilled") // 성공 - 서버 응답이 왔을때
+            const payload = action.payload; // 로그인처리\
+            return payload
+        })
+        .addCase(loginPostAsync.pending,(state,action)=>{
+            console.log("pending") // 처리중
+        })
+        .addCase(loginPostAsync.rejected,(state,action)=>{
+            console.log("rejected") // 실패
+            state.email='';
+        })
     }
 })
 

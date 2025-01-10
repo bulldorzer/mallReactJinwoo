@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { getOne } from "../../api/todoApi"
-import useCustomMove from "../../hook/useCustomHook"
+import useCustomMove from "../../hook/useCustomMove"
 import LiItem from "../common/LiItem"
 
 // 초기값 객체

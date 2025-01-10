@@ -19,14 +19,14 @@ export const loginPost = async (loginParam) =>{
      * - 주로 간단한 폼 데이터 전송에 사용.
      * 
      *  multipart/form-data   
-     * - 파일 업로드와 같은 복잡한 데이터 전송에 사용.
-     * - 본문이 경계(boundary)로 구분된 여러 파트로 나뉩니다.
+     *  - 파일 업로드와 같은 복잡한 데이터 전송에 사용.
+     *  - 본문이 경계(boundary)로 구분된 여러 파트로 나뉩니다.
      * 
-     * application/json   
-     * - 데이터를 JSON 형식으로 전송. 복잡한 데이터 구조를 전송할 때 선호됨.
+     *  application/json   
+     *  - 데이터를 JSON 형식으로 전송. 복잡한 데이터 구조를 전송할 때 선호됨.
      */
     const header = {headers : {"Content-type" : 'x-www-form-urlencoded'}}
-    const form = new FormData();
+    const form = new FormData(); // 폼데이터 (데이터전송 저장소)
     form.append('username', loginParam.email)
     form.append('password', loginParam.pw)
 
