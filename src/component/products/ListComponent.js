@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import { API_SERVER_PORT } from "../../api/todoApi"
 import { getList } from "../../api/productsApi"
-import ResultModal from "../common/ResultModal"
 import useCustomMove from "../../hook/useCustomMove"
 import FetchingModal from "../common/FetchingModal"
 import PageComponent from "../common/PageComponent"
+import useCustomLogin from "../../hook/useCustomLogin"
 
 // 주소불러옴
 const host = API_SERVER_PORT;
@@ -33,6 +33,7 @@ const initState = {
     current : 1
 }
 const ListComponent = () =>{
+    const {exceptionHandle} = useCustomLogin()
     const {page,size,refresh,moveToList,moveToRead} = useCustomMove()
     // const {page,size,moveToList : goToList} = useCustomMove() 함수이름 바꾸는 기법
     const [serverData,setServerData] = useState(initState);
@@ -54,7 +55,7 @@ const ListComponent = () =>{
           setServerData(()=> data ? data : initState)  
           setFetching(false)
           console.log(data)
-        })
+        }).catch(err=>exceptionHandle(err))
     },[page,size,refresh])
 
 
@@ -68,8 +69,12 @@ const ListComponent = () =>{
                 <li key={product.pno} onClick={()=>{moveToRead(product.pno)}}>
                     <p>{product.pno}</p>
                     <div>
+                        {/* 
+                            이미지경로?.[0] || "기본이미지.jpg"
+                            서버폴더 upload 파일에 기본 이미지 저장
+                         */}
                         <img
-                            src={`${host}/api/products/view/s_${product.uploadFileNames[0]}`}
+                            src={`${host}/api/products/view/s_${product.uploadFileNames?.[0] || "default.jpg"}`}
                             alt="product"
                             className=""
                         />

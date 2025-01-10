@@ -1,5 +1,6 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import { loginPost } from "../api/memberApi";
+import { setCookie, getCookie, removeCookie } from "../util/cookieUtil"
 
 /**
  * 이메일 받는 객체
@@ -7,6 +8,19 @@ import { loginPost } from "../api/memberApi";
 const initState = {
     email:''
 }
+
+// 쿠키 내용 점검
+const loadMemberCookie = () => {
+    const memberInfo = getCookie("member")
+
+    // 닉네임 처리
+    if (memberInfo && memberInfo.nickname) {
+        memberInfo.nickname = decodeURIComponent(memberInfo.nickname)
+    }
+
+    return memberInfo
+}
+
 /**
  * @param : 아이디 비번 -> 서버 응답결과 리턴
  * 비동기로 처리
@@ -36,7 +50,7 @@ export const loginPostAsync = createAsyncThunk('loginPostAsync',(param)=>{
  */
 const loginSlice = createSlice({
     name: 'LoginSlice',
-    initialState : initState,
+    initialState : loadMemberCookie() || initState,
     reducers : { // export시 action 이름으로 호출하여 사용하게됨
         login : (state, action) =>{ // state: 현재화면의 상태값 action : 들어온 데이터 처리
             console.log("login...")
@@ -47,6 +61,7 @@ const loginSlice = createSlice({
         logout : (state, action) =>{
             console.log("logout...")
             // return({...initState})
+            removeCookie("member")
             state.email=''; // 초기값 설정
         }
     },
@@ -55,7 +70,11 @@ const loginSlice = createSlice({
         // 상태에 따라 추가 실행할 구문 
         .addCase(loginPostAsync.fulfilled,(state,action)=>{
             console.log("fulfilled") // 성공 - 서버 응답이 왔을때
-            const payload = action.payload; // 로그인처리\
+            const payload = action.payload; // 로그인처리
+
+            if (!payload.error) {
+                setCookie("member",JSON.stringify(payload), 1) // 1일 기한
+            }
             return payload
         })
         .addCase(loginPostAsync.pending,(state,action)=>{

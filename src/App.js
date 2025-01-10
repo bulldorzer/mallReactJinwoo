@@ -1,8 +1,24 @@
 import { RouterProvider } from "react-router-dom";
 import root from "./router/root";
 import './css/App.css';
+import { useEffect } from "react";
+import { removeCookie } from "./util/cookieUtil";
 
 function App(){
+
+    // 브라우저 창을 닫을 때 쿠키 삭제
+    /*
+    useEffect(()=>{
+        
+        const deleteCookie = () => removeCookie("member")
+
+        window.addEventListener('beforeunload', deleteCookie)
+        
+        return() =>{
+            window.removeEventListener("beforeunload",deleteCookie )
+        }
+    },[])
+    */
 
     return(
        <RouterProvider router={root}/>
