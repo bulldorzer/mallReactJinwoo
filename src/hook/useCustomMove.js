@@ -35,7 +35,7 @@ const useCustomMove = () =>{
             // 없으면 쿼리스트링 초기화
             queryStr = queryDefault
         }
-        navigate( { pathname : `/todo/list`, search : queryStr} )
+        navigate( { pathname : `../list`, search : queryStr} )
 
         setRefresh(!refresh);
         
@@ -58,7 +58,16 @@ const useCustomMove = () =>{
         } )
     }
 
-    return {moveToList,moveToModify,moveToRead,page,size,refresh}
+    // 글쓰기 화면 이동
+    const moveToBoadAdd = ()=>{ 
+        
+        navigate( { pathname : `/board/add`} )
+
+        setRefresh(!refresh);
+        
+    }
+
+    return {moveToList,moveToModify,moveToRead,moveToBoadAdd,page,size,refresh}
 
     
 

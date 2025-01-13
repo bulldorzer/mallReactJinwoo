@@ -49,7 +49,7 @@ const requestFail = (err) => {
 
 // 응답 전에 실행할 구문
 const beforeRes = async (res) => {
-    console.log('response error....')
+    console.log('before response ....')
     
     const data = res.data
 

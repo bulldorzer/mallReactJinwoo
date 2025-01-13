@@ -13,6 +13,7 @@ const BasicMenu = ()=>{
                 loginState.email && <>
                 <Link to={"/todo"}>todo</Link>
                 <Link to={"/products"}>products</Link>
+                <Link to={"/board"}>board</Link>
                 </>
             }
         </nav>
