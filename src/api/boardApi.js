@@ -7,7 +7,7 @@ const prefix = `${API_SERVER_PORT}/api/board`
 // 상세보기 페이지
 export const getOne = async (bno) =>{
     // get 방식으로 비동기 통신
-    const res = await jwtAxios.get(`${prefix}/list/${bno}`)
+    const res = await jwtAxios.get(`${prefix}/list/${bno}?incrementView=true`)
     return res.data
 }
 
