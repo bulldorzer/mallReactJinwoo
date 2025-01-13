@@ -66,13 +66,15 @@ const loginSlice = createSlice({
         }
     },
     extraReducers : (builder) =>{ // loginPostAsync실행후 state 변화에 따른 추가 로직을 정의하는 레고 블록 조립기
+        //state : 현재값 , action: state에 대한 동작들 payload - 업데이트된 값을 가지고 있음
         builder
         // 상태에 따라 추가 실행할 구문 
         .addCase(loginPostAsync.fulfilled,(state,action)=>{
             console.log("fulfilled") // 성공 - 서버 응답이 왔을때
             const payload = action.payload; // 로그인처리
 
-            if (!payload.error) {
+            console.log(action.payload)
+            if (!payload.error) { // payload가 에러(=null)이면 새로 읽어온 값으로 쿠키값 다시 설정
                 setCookie("member",JSON.stringify(payload), 1) // 1일 기한
             }
             return payload

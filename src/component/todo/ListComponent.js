@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import useCustomMove from "../../hook/useCustomMove"
 import PageComponent from "../common/PageComponent"
 import { getList } from "../../api/todoApi"
+import UseCustomLogin from "../../hook/useCustomLogin"
 
 // 초기값 객체
 const initData = {
@@ -36,6 +37,8 @@ const ListComponent = ({tno}) =>{
     const {page,size,refresh,moveToList,moveToRead} = useCustomMove()
     // const {page,size,moveToList : goToList} = useCustomMove() 함수이름 바꾸는 기법
     const [serverData,setServerData] = useState(initState);
+
+    const {exceptionHandle} = UseCustomLogin();
     
     /*
         1. 처음 실행할 때 한번만 무조건 실행
@@ -50,7 +53,7 @@ const ListComponent = ({tno}) =>{
     useEffect(()=>{
         getList({page,size}).then( data=>{
           setServerData(data)  
-        })
+        }).catch(err=>exceptionHandle)
     },[page,size,refresh])
 
 

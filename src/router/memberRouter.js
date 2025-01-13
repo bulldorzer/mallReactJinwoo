@@ -2,6 +2,7 @@ import { Navigate } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import Login from "../pages/member/LoginPage";
 import Cart from "../pages/member/CartPage";
+import MyPage from "../pages/member/MyPage";
 
 
 
@@ -25,6 +26,10 @@ const memberRouter = () => {
         {
             path : "cart",
             element : <Suspense fallback={Loading}><Cart/></Suspense>
+        },
+        {
+            path : "mypage",
+            element : <Suspense fallback={Loading}><MyPage/></Suspense>
         }
         // {
         //     path : "read/:pno",

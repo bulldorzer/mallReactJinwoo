@@ -23,7 +23,7 @@ const UtilMenu = ()=>{
             <>
                 {/* 있으면 보여줄 카테고리 */}
                 <Link to={"#"} onClick={handleClickLogout}>로그아웃</Link>
-                <Link to={"/mypage"}>마이페이지</Link>
+                <Link to={"/member/mypage"}>마이페이지</Link>
             </>
             : <>
             {/* 없으면 보여줄 카테고리 */}

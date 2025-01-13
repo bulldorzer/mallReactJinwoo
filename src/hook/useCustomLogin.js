@@ -49,18 +49,26 @@ const useCustomLogin = () =>{
         return <navigate replace to='/member/login'/>
     })
 
-    const exceptionHandle = (e) =>{
+    /**
+     * 예외객체가 ex에 담겨온다
+     * @param {*} ex 
+     * @returns 
+     */
+    const exceptionHandle = (ex) =>{
         console.log("Exception...")
 
-        const errorMsg = e.response.data.error
+        const errorMsg = ex.response.data.error
+        // 에러메세지를 url의 쿼리 문자열로 변환
+        // ex) error=REQUIRE_LOGIN 형태
         const errorStr = createSearchParams({error: errorMsg}).toString()
 
         if (errorMsg === 'REQUIRE_LOGIN') {
             alert("로그인 해야만 합니다.")
+            /* errorStr = /memeber/login?error=REQUIRE_LOGIN */
             navigate({pathname:'/member/login', search: errorStr})
             return
         }
-        if (e.response.data.error === 'ERROR_ACCESSDENIED') {
+        if (ex.response.data.error === 'ERROR_ACCESSDENIED') {
             alert("해당 메뉴를 사용할 수 있는 권한이 없습니다.")
             navigate({pathname:'/member/login', search: errorStr})
             return

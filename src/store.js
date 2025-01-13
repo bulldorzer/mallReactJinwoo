@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import loginSlice from './slices/loginSlice'
+// import login  from "./slices/login";
 
 
 /**
@@ -9,5 +10,6 @@ import loginSlice from './slices/loginSlice'
 export default configureStore({ // 스토어 생성
     reducer : {
         "loginSlice" : loginSlice
+        // "login" : login
     }
 })

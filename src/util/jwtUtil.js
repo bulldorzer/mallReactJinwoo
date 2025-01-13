@@ -4,10 +4,16 @@ import {API_SERVER_PORT} from "../api/todoApi"
 
 const jwtAxios = axios.create() // 새로운 axios 객체(인스턴스) 생성
 
+/**
+ * 기존 쿠키에서 accessToken과 refreshToken을 다시 부여함
+ * @param {*} accessToken 
+ * @param {*} refreshToken 
+ * @returns 
+ */
 const refreshJWT = async(accessToken, refreshToken) => {
     const host = API_SERVER_PORT
 
-    const header = {headers : {"Authorizaton" : `Bearer ${accessToken}` }}
+    const header = {headers : {"Authorization" : `Bearer ${accessToken}` }}
 
     const res = await axios.get(`${host}/api/member/refresh?refreshToken=${refreshToken}`, header)
 
@@ -48,17 +54,20 @@ const beforeRes = async (res) => {
     const data = res.data
 
 
-    if(data && data.error === "ERROR_ACCESS_TOKEN"){
+    if(data && data.error === "ERROR_ACCESS_TOKEN"){ // acess토큰이 만료된 경우
         const memberCookieValue = getCookie("member")
 
         const result = await refreshJWT(memberCookieValue.accessToken, memberCookieValue.refreshToken)
         console.log("resfresshJWT RESULT", result)
 
+        // 요청 결과를 가지고 현재 쿠키를 업데이트함
         memberCookieValue.accessToken = result.accessToken
         memberCookieValue.refreshToken = result.refreshToken
 
+        // 쿠키 재설정
         setCookie("member", JSON.stringify(memberCookieValue), 1)
 
+        // 인증갱신
         const originalRequest = res.config
         originalRequest.headers.Authorization = `Bearer ${result.accessToken}`
         return await axios(originalRequest)
