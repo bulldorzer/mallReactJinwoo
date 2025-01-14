@@ -2,11 +2,11 @@ body{background-color: #444;}
 a{text-decoration: none;}
 button{
   background-color: transparent; border: 0;
-  padding: 3px 12px; margin: 0 0 0 10px; border-radius: 3px;
+  padding: 3px 12px; margin: 0 0 0 0.5rem; border-radius: 3px;
 }
-
-.btn{background-color: #000; color: #fff;}
-
+button.btn{background-color: #000; color: #fff;}
+button.list, 
+button.cancle{background-color: white; color: #000; border: 1px solid #000;}
 
 /* header */
 .header{
@@ -19,7 +19,7 @@ button{
 .header .utilMenu{display: flex; align-items: center; font-size: 14px;}
 .header a{ color: #fff; text-transform: uppercase;}
 .header .gnb a{padding: 0 1rem; }
-.header .utilMenu a{padding: 0 0.75rem; }
+.header .utilMenu a{padding: 0 0.75rem; font-size: 13px;}
 
 
 
@@ -34,50 +34,43 @@ button{
 .container aside { flex: 1;}
 
 
-/* todo */
 .content{ padding: 2rem 1rem; }
-
-.menu > button{ margin-right : 1rem ; font : bold 16px 'inherit'; text-decoration : underline; }
-
-
-.todo li {display: flex; border-bottom: #ddd 1px solid;}
-
-/* 목록페이지 Listpage */
-.todo .list{padding: 2rem 0;}
-.todo .list .header{text-align: center;}
-.todo .list li{display: flex; padding: 0.5rem 0;}
-.todo .list li span{flex:2.5; text-align: center;}
-.todo .list li span.tno{flex:1;}
-.todo .list li span.title{flex:5; text-align: left;}
-.todo .list li.header span.title{text-align: center;}
-
-/* 상세페이지 ReadPage, AddPage, ModifyPage item 공통*/
-.todo .item {margin: 2rem 0;}
-.todo .item li:last-of-type{border:0}
-.todo .item li .labelWrap{flex: 1; padding: 0.5rem 1rem; text-align: right;}
-.todo .item li .dataWrap{flex: 4; padding: 0.5rem 1rem;}
-
-.todo .item li input{ min-width: 180px; padding: 5px 10px; border: 1px solid #ddd;}
-.todo .item li input[type=radio]{ min-width: 30px;}
-
-/* 읽기전용 필드*/
-.todo .item li .readOnly input{
-  background-color: transparent;
-  border: 0;
-  outline: 0;
-}
-
-.todo .btnGroup{text-align: right;}
+.content .menu > button{ margin-right : 1rem ; font : bold 16px 'inherit'; text-decoration : underline; }
+.content .btnGroup{display: flex; justify-content: flex-end;}
 
 
-.todo .pagination{text-align: center;}
-.todo .pagination a{padding: 0 0.5rem;}
+.content li {display: flex; border-bottom: #ddd 1px solid;}
+
+/* ListPage - 목록페이지 */
+.content ul.list{padding: 2rem 0; }
+.content .list li{display: flex; padding: 0.5rem 0;}
+.content .list li span.tno{flex:1; }
+.content .list li span.title{flex:5; text-align: left;}
+.content .list li span{flex:2.5; text-align: center; white-space: nowrap;}
+.content .list li.header span.title{text-align: center;}
+
+/* Read, Add, Modify - Item 공통css */
+.content .item {margin: 2rem 0;}
+.content .item li:last-of-type{border:0}
+.content .item li .labelWrap{flex: 1; padding: 0.5rem 1rem; text-align: right;}
+.content .item li .dataWrap{flex: 5; padding: 0.5rem 1rem;}
+
+.content .item li input{  width: 100%;min-width: 200px; padding: 5px 10px; border: 1px solid #ddd; }
+.content .item li input[type=radio]{ min-width: 30px;}
+.content .item li textarea{width: 100%; min-width: 200px; height: 300px;padding: 5px 10px; border: 1px solid #ddd;}
+
+/* 읽기전용 필드 */
+.content .item li.readOnly input{ background-color: transparent;border: 0; outline: 0;}
+.content .item li.readOnly textarea{ height: auto;background-color: transparent;border: 0; outline: 0;}
+
+.content .pagination{text-align: center;}
+.content .pagination a{padding: 0 0.5rem;}
 
 /* Modal */
 
 .modal{
-  /* 현재창 정가운데 맞춤 */
-  position: fixed; left: 50%; top: 50%;
+
+  position: fixed; left: 50%; top: 50%; /* 현재창 정가운데 맞춤 */
   transform: translate(-50%,-50%);
 
   padding: 5rem 10rem;

@@ -4,15 +4,7 @@ import useCustomMove from "../../hook/useCustomMove"
 import UseCustomLogin from "../../hook/useCustomLogin"
 import PageComponent from "../common/PageComponent"
 
-const initData = {
-    bno: 0,
-    title: '',
-    writer: '',
-    viewCount: 0,
-    postDate: '',
-    complete: false,
 
-}
 
 const initState = {
     dtoList : [], // 서버데이터가 여기에 들어옴
@@ -38,7 +30,7 @@ const BoardComponent = () =>{
    
     useEffect(()=>{
             getList({page,size}).then( data=>{
-                console.log(data)
+                // console.log(data)
               setServerData(data)  
             }).catch(err=>exceptionHandle)
         },[page,size,refresh])
@@ -56,8 +48,8 @@ const BoardComponent = () =>{
                 {
                     serverData.dtoList.map((board) =>( // 배열로 데이터가 들어오고 board로 배열의 데이터중 하나의 데이터를 가져옴
                         
-                        <li key={board.bno} onClick={()=>{moveToRead(board.bno)}} >
-                            <span className="tno">{board.bno}</span>
+                        <li key={board.bno} onClick={()=>moveToRead(board.bno)} >
+                            <span className="bno">{board.bno}</span>
                             <span className="title">{board.title}</span>
                             <span className="writer">{board.writer}</span>
                             <span className="visitCount">{board.visitCount || 0}</span>

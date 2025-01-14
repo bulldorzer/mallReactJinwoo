@@ -41,6 +41,16 @@ const useCustomMove = () =>{
         
     }
 
+    
+    // 상세 페이지 이동
+    const moveToRead = (num) =>{
+        console.log("moveToRead" ,queryDefault);
+        navigate( {
+            pathname : `../read/${num}`,
+            search : queryDefault
+        } )
+    }
+    
     // 수정 화면 이동
     const moveToModify = ((num)=>{
         navigate( {
@@ -49,14 +59,6 @@ const useCustomMove = () =>{
         } )
     })
 
-    // 상세 페이지 이동
-    const moveToRead = (num) =>{
-        // console.log(queryDefault);
-        navigate( {
-            pathname : `../read/${num}`,
-            search : queryDefault
-        } )
-    }
 
     // 글쓰기 화면 이동
     const moveToBoadAdd = ()=>{ 
